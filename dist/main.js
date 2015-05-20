@@ -1,32 +1,58 @@
 
 var dateBox = document.getElementById("date-box");
 var actualDate = document.getElementById("date");
-var color = ["red","OrangeRed","Tomato","orange","yellow","YellowGreen","green","SeaGreen","blue","BlueViolet","violet","MediumVioletRed"];
+var counterBar = document.getElementById("counter-bar");
+var color = ["red","OrangeRed","Tomato","orange","yellow","YellowGreen",
+"green","SeaGreen","blue","BlueViolet","violet","MediumVioletRed"];
 var isHex = false;
+var barDateSync = new Date();
+var barWidth = (barDateSync.getSeconds()/0.126);
 counter = 0;
 dateBox.style.height = "400px";
 dateBox.style.width = "850px";
 dateBox.style.background = "MediumVioletRed";
-dateBox.style.transition = "background, 2s"
+//dateBox.style.background = "background: radial-gradient(circle, MediumVioletRed, "+color[counter]+"";
+dateBox.style.transition = "background 2s";
+//dateBox.style.transition = "-webkit-transition: background 2s radial";
+
+
+counterBar.style.height = "5px";
+counterBar.style.width = (barDateSync.getSeconds()/0.126)+"px";
+counterBar.style.background = "white";
+counterBar.style.margin = "auto";
+counterBar.style.transition = "width, 1s"
+
 
 
 actualDate.innerHTML = theDate();
 
 
 function getTheTime(){
+	var barDate = new Date();
+	if(barDate.getSeconds() === 0){
+		barWidth = 0;
+	} else {
+		barWidth+=8;
+	}
+	
 	if(isHex){
 		actualDate.innerHTML = hexDate();
+		counterBar.style.width = barWidth+"px";
 	} else {
 		actualDate.innerHTML = theDate();
+		counterBar.style.width = barWidth+"px";
 	}
 }
 function setColorBackground() {
 	counter++;
-	if(counter === color.length){
+	if(counter === color.length-1){
 		counter = 0;
 	}
 	
 	dateBox.style.background = color[counter];
+	//dateBox.style.background = "background: radial-gradient(circle,"+color[counter]+", "+color[counter+1]+"";
+	//dateBox.style.transition = "background 2s";
+	//dateBox.style.transition = "-webkit-transition: background 2s radial";
 }
 
 var handler = setInterval(getTheTime,1000);
