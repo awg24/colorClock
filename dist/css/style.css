@@ -1,0 +1,13 @@
+#date-box {
+  margin: auto;
+  margin-top: 5%;
+  text-align: center;
+  font-size: 100px;
+  font-family: Verdana;
+  padding-top: 250px;
+  color: white; }
+
+#date-box #date {
+  width: 55%;
+  margin-left: auto;
+  margin-right: auto; }
